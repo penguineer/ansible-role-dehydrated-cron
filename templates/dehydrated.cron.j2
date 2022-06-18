@@ -1,0 +1,7 @@
+# /etc/cron.d/dehydrated: Cron calls to Dehydrated
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+{{ dehydrated_cron_renew }} {{ dehydrated_cron_script_dir }}/dehy-wrap.sh
+{{ dehydrated_cron_check }} {{ dehydrated_cron_script_dir }}/dehy-check.sh
