@@ -1,6 +1,12 @@
 ---
 # tasks file for dehydrated-cron
 
+- name: Ensure openssl dependency is installed
+  package:
+    name:
+      - openssl
+    state: present
+
 - name: Copy dehydrated cron helper scripts
   ansible.builtin.template:
     src: "templates/{{ item }}.j2"
