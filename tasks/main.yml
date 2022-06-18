@@ -1,2 +1,22 @@
 ---
 # tasks file for dehydrated-cron
+
+- name: Copy dehydrated cron helper scripts
+  ansible.builtin.template:
+    src: "templates/{{ item }}.j2"
+    dest: "{{ dehydrated_cron_script_dir }}/{{ item }}"
+    owner: root
+    group: root
+    mode: '0755'
+  with_items:
+  - "dehy-check.sh"
+  - "dehy-wrap.sh"
+
+
+- name: Set up cron
+  ansible.builtin.template:
+    src: "templates/dehydrated.cron.j2"
+    dest: "/etc/cron.d/dehydrated"
+  notify: reload cron
+  # There is ansible.builtin.cron, but this makes configuration much
+  # more complicated, so we stick to the template.
