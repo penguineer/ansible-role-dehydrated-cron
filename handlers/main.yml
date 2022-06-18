@@ -1,0 +1,6 @@
+---
+# handlers file for dehydrated-cron
+- name: reload cron
+  service:
+    name: cron
+    state: reloaded
