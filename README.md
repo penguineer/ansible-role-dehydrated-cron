@@ -1,5 +1,7 @@
 # Ansible Role: deyhdrated_cron
 
+[![Molecule](https://github.com/penguineer/ansible-role-dehydrated_cron/actions/workflows/molecule.yml/badge.svg)](https://github.com/penguineer/ansible-role-dehydrated_cron/actions/workflows/molecule.yml)
+
 > Install cron calls to dehydrated and only send e-mails in case of changes.
 
 
