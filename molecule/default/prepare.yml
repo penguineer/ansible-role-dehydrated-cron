@@ -1,0 +1,23 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Update Package Cache (apt)
+      apt:
+        update_cache: yes
+      changed_when: false
+
+    - name: "Install cron"
+      package:
+        name:
+          - cron
+        state: present
+
+    - name: Start cron
+      ansible.builtin.shell:
+        cmd: service cron start
+        warn: no
+# Use the shell call because the task sometimes has problems finding the service state
+#      service:
+#        name: cron
+#        state: started

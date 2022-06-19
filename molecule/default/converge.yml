@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include penguineer.dehydrated_cron"
+      include_role:
+        name: "penguineer.dehydrated_cron"
+

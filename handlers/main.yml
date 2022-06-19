@@ -1,6 +1,10 @@
 ---
 # handlers file for dehydrated-cron
 - name: reload cron
-  service:
-    name: cron
-    state: restarted
+  ansible.builtin.shell:
+    cmd: service cron reload
+    warn: no
+# Use the shell call because the task sometimes has problems finding the service state
+#  service:
+#    name: cron
+#    state: restarted
