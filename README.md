@@ -1,4 +1,4 @@
-# Ansible Role: Deyhdrated Cron
+# Ansible Role: deyhdrated_cron
 
 > Install cron calls to dehydrated and only send e-mails in case of changes.
 
@@ -30,7 +30,7 @@ vars:
   - dehydrated_…: …
 
 roles:
-  - role: dehydrated
+  - role: penguineer.dehydrated_cron
 ```
 
 as task:
@@ -39,7 +39,7 @@ as task:
 tasks:
   - name: Setup cron for dehydrated
     include_role:
-      name: ansible-role-dehydrated-cron
+      name: penguineer.dehydrated_cron
     vars:
       dehydrated_…: …
 ```
