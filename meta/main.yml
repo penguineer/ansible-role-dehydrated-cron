@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: dehydrated_cron
   author: Stefan Haun
   description: Install cron calls to dehydrated and only send e-mails in case of changes.
 
