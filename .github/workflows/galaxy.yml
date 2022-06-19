@@ -1,3 +1,4 @@
+---
 name: Push to Galaxy
 
 on:
@@ -13,12 +14,12 @@ jobs:
     steps:
 
       - name: checkout
-          uses: actions/checkout@v3
-          with:
-            path: "${{ github.repository }}"
+        uses: actions/checkout@v3
+        with:
+          path: "${{ github.repository }}"
 
       - name: molecule
-          uses: robertdebock/molecule-action@4.0.8
+        uses: robertdebock/molecule-action@4.0.8
 
   release:
     needs:
