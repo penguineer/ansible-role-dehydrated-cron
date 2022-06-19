@@ -7,11 +7,17 @@
         update_cache: yes
       changed_when: false
 
-    - name: "Install cron"
+    - name: "Install cron and syslog-ng"
       package:
         name:
           - cron
+          - syslog-ng
         state: present
+
+    - name: Start syslog
+      ansible.builtin.shell:
+        cmd: service syslog-ng start
+        warn: no
 
     - name: Start cron
       ansible.builtin.shell:

@@ -5,6 +5,58 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
+  - name: Check if /etc/cron.d/dehydrated exists
+    stat:
+      path: /etc/cron.d/dehydrated
+    register: cron_file
+
+  - name: Assert cron file exists
     ansible.builtin.assert:
-      that: true
+      that: cron_file.stat.exists
+
+  - name: Check if /usr/local/bin/dehy-check.sh exists
+    stat:
+      path: /usr/local/bin/dehy-check.sh
+    register: check_file
+
+  - name: Assert check helper file exists
+    ansible.builtin.assert:
+      that: check_file.stat.exists
+
+  - name: Check if /usr/local/bin/dehy-wrap.sh exists
+    stat:
+      path: /usr/local/bin/dehy-wrap.sh
+    register: wrap_file
+
+  - name: Assert renew helper file exists
+    ansible.builtin.assert:
+      that: wrap_file.stat.exists
+
+  - name: Wait 120 seconds for CRON to be invoked
+    wait_for:
+      timeout: 120
+    delegate_to: localhost
+
+  - name: Check if cron call to check has been reported
+    ansible.builtin.replace:
+      name: /var/log/syslog
+      regexp: ".* \\(root\\) CMD \\( \\/usr\\/local\\/bin\\/dehy-check\\.sh\\)"
+      replace: "Check entry found"
+    check_mode: yes
+    register: run_check
+
+  - name: Assert check helper entry could be found
+    ansible.builtin.assert:
+      that: (run_check is changed) and (run_check is not failed)
+
+  - name: Check if cron call to renew has been reported
+    ansible.builtin.replace:
+      name: /var/log/syslog
+      regexp: ".* \\(root\\) CMD \\( \\/usr\\/local\\/bin\\/dehy-wrap\\.sh\\)"
+      replace: "Wrap entry found"
+    check_mode: yes
+    register: run_wrap
+
+  - name: Assert renew helper entry could be found
+    ansible.builtin.assert:
+      that: (run_wrap is changed) and (run_wrap is not failed)
