@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: checkout
-        uses: actions/checkout@v3
-        with:
-          path: "${{ github.repository }}"
+      - name: checkout
+          uses: actions/checkout@v3
+          with:
+            path: "${{ github.repository }}"
 
-    - name: molecule
-        uses: robertdebock/molecule-action@4.0.8
+      - name: molecule
+          uses: robertdebock/molecule-action@4.0.8
 
   release:
     needs:
