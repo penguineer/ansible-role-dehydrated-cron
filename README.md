@@ -46,6 +46,9 @@ tasks:
       dehydrated_…: …
 ```
 
+### Cleanup
+
+If you had dehydrated running before, make sure to disable any pre-existing crontab entries.
 
 ## Maintainers
 
