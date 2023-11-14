@@ -2,7 +2,7 @@
 
 DOMAINS="{{ dehydrated_config_dir }}/domains.txt"
 DEHYDRATED="{{ dehydrated_binary }}"
-CALL="$DEHYDRATED -c"
+CALL="$DEHYDRATED -c -g"
 
 RESULT=$($CALL)
 RETURN=$?
